@@ -6,7 +6,6 @@ class Lexer {
   cursor: number;
   tokens: Array<Token>;
   constructor(public source: string) {
-    this.source = source;
     this.cursor = 0;
     this.tokens = [];
   }
@@ -33,12 +32,9 @@ class Lexer {
 
   tokenize() {
     let c = this.peek();
-    while (true) {
+    while (c !== undefined) {
       this.trimLeft();
       c = this.peek();
-      if (c === undefined) {
-        break;
-      }
 
       if (this.curr === ";") {
         this.tokens.push(TokenFactory.SEMICOLON());
