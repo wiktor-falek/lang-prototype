@@ -25,8 +25,8 @@ class Lexer {
     return this.source[this.cursor + ahead - 1];
   }
 
-  chop() {
-    this.cursor++;
+  chop(amount = 1) {
+    this.cursor += amount;
     return this.peek();
   }
 
@@ -54,7 +54,7 @@ class Lexer {
         const value = this.source.slice(start, end + 1);
         this.tokens.push(TokenFactory.INT_LITERAL(value));
 
-        this.cursor = end; // chop to the last subsequent digit
+        this.chop(digitLen - 2); // chop to the last subsequent digit
       } else if (isAlpha(c)) {
       }
       this.chop();
